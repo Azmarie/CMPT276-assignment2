@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :enrolls
+  resources :courses
+  resources :students
   resources :widgets
 
   # The priority is based upon order of creation: first created -> highest priority.

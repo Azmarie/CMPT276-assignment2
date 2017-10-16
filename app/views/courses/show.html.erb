@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Enrolled Student List</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Percentage</th>
+      <th>Grade</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @enrolled.each do |enrolled| %>
+      <tr>
+        <td><%= enrolled.name %></td>
+        <td><%= enrolled.percentage %></td>
+        <td><%= enrolled.lettergrade %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<br>
+<%= link_to 'Back', courses_path %>

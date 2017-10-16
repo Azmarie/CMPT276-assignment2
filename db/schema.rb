@@ -11,12 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140707111715) do
+ActiveRecord::Schema.define(version: 20171016051756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "widgets", force: true do |t|
+  create_table "courses", force: :cascade do |t|
+    t.string   "course_id"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "enrolls", force: :cascade do |t|
+    t.integer  "student_id"
+    t.string   "course_id"
+    t.decimal  "percentage"
+    t.string   "lettergrade"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "enrolls", ["course_id"], name: "index_enrolls_on_course_id", using: :btree
+  add_index "enrolls", ["student_id"], name: "index_enrolls_on_student_id", using: :btree
+
+  create_table "students", force: :cascade do |t|
+    t.integer  "student_id"
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "widgets", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "stock"
