@@ -25,3 +25,11 @@
 
 <br>
 <%= link_to 'Back', courses_path %>
+<!-- <%= link_to 'Assign Grades', courses_histogram_path, data: {course_id: @course_id} %> -->
+<%= link_to 'Assign Grades', courses_histogram_path(course_id: @course_id) %>
+<!-- <%= link_to 'Assign Grades', courses_histogram_path(@course_id) %> -->
+
+
+
+
+<!-- path(@course_id) -->

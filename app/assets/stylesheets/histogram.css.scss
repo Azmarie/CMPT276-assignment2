@@ -1,0 +1,62 @@
+h1 {
+    color: black;
+    margin-left: 40px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-family: "Arial";
+    font-weight: normal;
+}
+
+h3 {
+    font-family: "Georgia";
+    color: #cc0000;
+    margin-left: 10px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+#div1 {
+    float: left;
+    margin-left: 50px;
+    width: 25%;
+    background-color: #eef2f7;
+    color: black;
+}
+
+#list1 {
+    margin-bottom: 25px;
+}
+#list2 {
+    margin-bottom: 20px;
+}
+.input-field {
+    //To do: change this, this is too ugly
+    font-size: 15px;
+    font-family: Georgia;
+    //text-align: right;
+    float: right;
+    margin-right: 100px;
+    //padding-right: 10px;
+    width: 80px;
+    //height: 26px;
+}
+
+#div2 {
+    float: left;
+    width: 20%;
+    margin-left: 20px;
+    background-color: #eef2f7;
+    color: black;
+}
+
+span.grade {
+    float: left;
+    width: 100px;
+}
+
+output {
+    margin-right: 20px;
+}
+ul {
+    list-style-type: none
+}

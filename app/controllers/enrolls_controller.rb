@@ -26,6 +26,20 @@ class EnrollsController < ApplicationController
   def create
     @enroll = Enroll.new(enroll_params)
 
+    @student = Student.where(:student_id => enroll_params[:student_id]).first
+    if @student
+    else
+        redirect_to new_enroll_path, notice: "The student is not the database."
+        return
+    end
+
+    @course = Course.where(enroll_params[:course_id])
+    if @course
+    else
+        redirect_to new_enroll_path, notice: "The course is not the database."
+        return
+    end
+
     respond_to do |format|
       if @enroll.save
         format.html { redirect_to @enroll, notice: 'Enroll was successfully created.' }

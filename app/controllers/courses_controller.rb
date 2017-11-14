@@ -11,7 +11,8 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
       #how to initialize enroll and studetns
-      @course = Course.find(params[:id])
+      @course_id = params[:id]
+      @course = Course.find(@course_id)
       @enroll = Enroll.all
       @student = Student.all
      # where course id = enrolls course id
@@ -28,16 +29,64 @@ class CoursesController < ApplicationController
   def edit
   end
 
+  # GET... render the histgoram html.
+  def histogram
+      @course_id = params[:course_id]
+      @course = Course.find(@course_id)
+
+      @enrollsForClass = Enroll.select('enrolls.percentage').where(course_id: @course.course_id)
+      @percentages = []
+      @enrollsForClass.each do |enroll|
+          @percentages.push(enroll.percentage)
+      end
+  end
+
+  #POST for grades changes
+  def changeGrades
+      print "here m here"
+      # takes the new grades criteris.
+      # goes through all enrolls. and modifies the grade according to the new grades criteria.
+      grade_bounds = [
+          {max: params[:max], min: params[:A_plus], letter: 'A+'},
+          {max: params[:A_plus], min: params[:A], letter: 'A'},
+          {max: params[:A], min: params[:A_mius], letter: 'A-'},
+          {max: params[:A_minus], min: params[:B_plus], letter: 'B+'},
+          {max: params[:B_plus], min: params[:B], letter: 'B'},
+          {max: params[:B], min: params[:B_minus], letter: 'B-'},
+          {max: params[:B_minus], min: params[:C_plus], letter: 'C+'},
+          {max: params[:C_plus], min: params[:C], letter:'C'},
+          {max: params[:C], min: params[:C_minus], letter: 'C-'},
+          {max: params[:C_minus], min: params[:D], letter: 'D'},
+          {max: params[:D], min: params[:F], letter:'F'}
+      ]
+
+      @enrollsForClass = Enroll.where(course_id: @courseid)
+      @enrollsForClass.each do |enroll|
+          grade_bounds.each do |grade_bound|
+              check_upper_bound = grade_bound[:letter] == 'A+' ?
+                enroll.percentage <= grade_bound[:max]:
+                enroll.percentage < grade_bound[:max]
+              check_lower_bound = enroll.percentage >= grade_bound[:min]
+              if check_lower_bound and check_upper_bound
+                  enroll.lettergrade = grade_bound[:letter]
+                  enroll.save
+                  break
+              end
+          end
+      end
+  end
+
+
   # POST /courses
   # POST /courses.json
   def create
     @course = Course.new(course_params)
 
     respond_to do |format|
-      if @course.save
+    if @course.save
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
-      else
+    else
         format.html { render :new }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end

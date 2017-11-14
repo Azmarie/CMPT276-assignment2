@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  get 'courses/histogram'
+  post 'courses/changeGrades'
+
   resources :enrolls
   resources :courses
   resources :students

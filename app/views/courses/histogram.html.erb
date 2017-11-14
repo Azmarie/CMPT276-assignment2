@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Assignment 1</title>
+  <link rel="stylesheet" href="histogram.css" type="text/css"/>
+</head>
+<h1>Histogram Generater</h1>
+
+<body>
+
+<script> var grades = <%= @percentages.to_json.to_s.html_safe %></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+<script src="calculate.js" type="text/javascript"></script>
+
+<div id="div1">
+<h3>Lower bounds</h3>
+
+<% form_tag(controller: "courses", action: "changeGrades", method: "post") %>
+  <%= hidden_field_tag :course_id, @course_id %>
+<!-- <form action="/courses/changeGrades" method="post" /> -->
+  <ul>
+  <li id="list1" />
+      <%= label_tag(:max, "Max") %>
+      <%= text_field_tag("max", "100.00", class: "input-field") %>
+      <!-- <label for="max">Max</label> -->
+      <!-- <input type="text" name= "max" value="100.00" id="max" class="input-field"/> -->
+  <li id="list1" />
+      <%= label_tag(:A_plus, "A+") %>
+      <%= text_field_tag("A_plus", "95.00", class: "input-field") %>
+  <li id="list1" />
+      <%= label_tag(:A, "A") %>
+      <%= text_field_tag("A", "90.00", class: "input-field") %>
+  <li id="list1" />
+      <%= label_tag(:A_minus, "A-") %>
+      <%= text_field_tag("A_minus", "85.00", class: "input-field") %>
+  <li id="list1" />
+      <%= label_tag(:B_plus, "B+") %>
+      <%= text_field_tag("B_plus", "80.00", class: "input-field") %>
+  <li id="list1" />
+      <%= label_tag(:B, "B") %>
+      <%= text_field_tag("B", "75.00", class: "input-field") %>
+  <li id="list1" />
+      <%= label_tag(:B_minus, "B-") %>
+      <%= text_field_tag("B_minus", "70.00", class: "input-field") %>
+  <li id="list1" />
+      <%= label_tag(:C_plus, "C+") %>
+      <%= text_field_tag("C_plus", "65.00", class: "input-field") %>
+  <li id="list1" />
+      <%= label_tag(:C, "C") %>
+      <%= text_field_tag("C", "60.00", class: "input-field") %>
+  <li id="list1" />
+      <%= label_tag(:C_minus, "C-") %>
+      <%= text_field_tag("C_minus", "55.00", class: "input-field") %>
+  <li id="list1" />
+      <%= label_tag(:D, "D") %>
+      <%= text_field_tag("D", "50.00", class: "input-field") %>
+  <li id="list1" />
+      <%= label_tag(:F, "F") %>
+      <%= text_field_tag("F", "0.00", class: "input-field") %>
+  </ul>
+<!-- <%= submit_tag("changeGrades", type: "button")%> -->
+<input type="button" style="display:none">
+<!-- <button> Submit </button> -->
+<!-- to-do: add a real button, and go back to previous page -->
+<a href="javascript:history.back()">Go Back</a>
+</div>
+
+<div id="div2">
+<h3>Histogram</h3>
+<ul>
+  <li id="list2"><span class="grade">A+</span> <output id = "countAplus"> </output>    </li>
+  <li id="list2"><span class="grade">A</span>  <output id = "countA"> </output>        </li>
+  <li id="list2"><span class="grade">A-</span> <output id = "countAmius"> </output>    </li>
+  <li id="list2"><span class="grade">B+</span> <output id = "countBplus"> </output>    </li>
+  <li id="list2"><span class="grade">B</span>  <output id = "countB"> </output>        </li>
+  <li id="list2"><span class="grade">B-</span> <output id = "countBmius"> </output>    </li>
+  <li id="list2"><span class="grade">C+</span> <output id = "countCplus"> </output>    </li>
+  <li id="list2"><span class="grade">C</span>  <output id = "countC"> </output>        </li>
+  <li id="list2"><span class="grade">C-</span> <output id = "countCmius"> </output>    </li>
+  <li id="list2"><span class="grade">D</span>  <output id = "countD"> </output>        </li>
+  <li id="list2"><span class="grade">F</span>  <output id = "countF"> </output>        </li>
+</ul>
+</div>
+
+</body>
+
+</html>
