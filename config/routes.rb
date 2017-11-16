@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
 
-  get 'courses/histogram'
-  post 'courses/changeGrades'
   resources :enrolls
-  resources :courses
+
+  resources :courses do
+      member do
+          get "histogram"
+          post "changeGrades"
+      end
+  end
   resources :students
   resources :widgets
 

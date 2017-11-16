@@ -31,7 +31,7 @@ class CoursesController < ApplicationController
 
   # GET... render the histgoram html.
   def histogram
-      print params[:course_id]
+      # print params[:course_id]
       @course_id = params[:course_id]
       @course = Course.find(@course_id)
 
@@ -44,14 +44,14 @@ class CoursesController < ApplicationController
 
   #POST for grades changes
   def changeGrades
-      print "here m here"
-      print params[:max]
+      print "@1"
+      # print params[:max]
       # takes the new grades criteris.
       # goes through all enrolls. and modifies the grade according to the new grades criteria.
       grade_bounds = [
           {max: params[:max], min: params[:A_plus], letter: 'A+'},
           {max: params[:A_plus], min: params[:A], letter: 'A'},
-          {max: params[:A], min: params[:A_mius], letter: 'A-'},
+          {max: params[:A], min: params[:A_minus], letter: 'A-'},
           {max: params[:A_minus], min: params[:B_plus], letter: 'B+'},
           {max: params[:B_plus], min: params[:B], letter: 'B'},
           {max: params[:B], min: params[:B_minus], letter: 'B-'},
@@ -61,22 +61,27 @@ class CoursesController < ApplicationController
           {max: params[:C_minus], min: params[:D], letter: 'D'},
           {max: params[:D], min: params[:F], letter:'F'}
       ]
-
-      @enrollsForClass = Enroll.where(course_id: @courseid)
+      @course_id = params[:course_id]
+      @course = Course.find(@course_id)
+      @enrollsForClass = Enroll.where(course_id: @course.course_id)
       @enrollsForClass.each do |enroll|
-          grade_bounds.each do |grade_bound|
-              check_upper_bound = grade_bound[:letter] == 'A+' ?
-                enroll.percentage <= grade_bound[:max]:
-                enroll.percentage < grade_bound[:max]
-              check_lower_bound = enroll.percentage >= grade_bound[:min]
-              if check_lower_bound and check_upper_bound
-                  enroll.lettergrade = grade_bound[:letter]
-                  enroll.save
-                  break
-              end
+          print enroll.percentage
+        grade_bounds.each do |grade_bound|
+            print (grade_bound)
+          match_upper_bound = grade_bound[:letter] == 'A+'? enroll.percentage <= grade_bound[:max].to_f : enroll.percentage < grade_bound[:max].to_f
+          match_lower_bound = enroll.percentage >= grade_bound[:min].to_f
+
+          if match_upper_bound && match_lower_bound
+                print ("here")
+                enroll.lettergrade = grade_bound[:letter]
+                enroll.save
+                break
           end
+        end
       end
+      redirect_to action: "show", course_id: @course_id
   end
+
 
 
   # POST /courses
