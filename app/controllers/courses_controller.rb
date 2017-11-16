@@ -31,6 +31,7 @@ class CoursesController < ApplicationController
 
   # GET... render the histgoram html.
   def histogram
+      print params[:course_id]
       @course_id = params[:course_id]
       @course = Course.find(@course_id)
 
@@ -44,6 +45,7 @@ class CoursesController < ApplicationController
   #POST for grades changes
   def changeGrades
       print "here m here"
+      print params[:max]
       # takes the new grades criteris.
       # goes through all enrolls. and modifies the grade according to the new grades criteria.
       grade_bounds = [

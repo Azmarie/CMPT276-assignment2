@@ -16,53 +16,50 @@
 <div id="div1">
 <h3>Lower bounds</h3>
 
-<% form_tag(controller: "courses", action: "changeGrades", method: "post") %>
-  <%= hidden_field_tag :course_id, @course_id %>
-<!-- <form action="/courses/changeGrades" method="post" /> -->
+<%= content_tag :div, data: {percentages: @percentages} do %><%end%>
+<%= form_tag(courses_changeGrades_path, method: "post") do %>
   <ul>
   <li id="list1" />
       <%= label_tag(:max, "Max") %>
-      <%= text_field_tag("max", "100.00", class: "input-field") %>
+      <%= text_field_tag(:max, "100.00", class: "input-field") %>
       <!-- <label for="max">Max</label> -->
       <!-- <input type="text" name= "max" value="100.00" id="max" class="input-field"/> -->
   <li id="list1" />
       <%= label_tag(:A_plus, "A+") %>
-      <%= text_field_tag("A_plus", "95.00", class: "input-field") %>
+      <%= text_field_tag(:A_plus, "95.00", class: "input-field") %>
   <li id="list1" />
       <%= label_tag(:A, "A") %>
-      <%= text_field_tag("A", "90.00", class: "input-field") %>
+      <%= text_field_tag(:A, "90.00", class: "input-field") %>
   <li id="list1" />
       <%= label_tag(:A_minus, "A-") %>
-      <%= text_field_tag("A_minus", "85.00", class: "input-field") %>
+      <%= text_field_tag(:A_minus, "85.00", class: "input-field") %>
   <li id="list1" />
       <%= label_tag(:B_plus, "B+") %>
-      <%= text_field_tag("B_plus", "80.00", class: "input-field") %>
+      <%= text_field_tag(:B_plus, "80.00", class: "input-field") %>
   <li id="list1" />
       <%= label_tag(:B, "B") %>
-      <%= text_field_tag("B", "75.00", class: "input-field") %>
+      <%= text_field_tag(:B, "75.00", class: "input-field") %>
   <li id="list1" />
       <%= label_tag(:B_minus, "B-") %>
-      <%= text_field_tag("B_minus", "70.00", class: "input-field") %>
+      <%= text_field_tag(:B_minus, "70.00", class: "input-field") %>
   <li id="list1" />
       <%= label_tag(:C_plus, "C+") %>
-      <%= text_field_tag("C_plus", "65.00", class: "input-field") %>
+      <%= text_field_tag(:C_plus, "65.00", class: "input-field") %>
   <li id="list1" />
       <%= label_tag(:C, "C") %>
-      <%= text_field_tag("C", "60.00", class: "input-field") %>
+      <%= text_field_tag(:C, "60.00", class: "input-field") %>
   <li id="list1" />
       <%= label_tag(:C_minus, "C-") %>
-      <%= text_field_tag("C_minus", "55.00", class: "input-field") %>
+      <%= text_field_tag(:C_minus, "55.00", class: "input-field") %>
   <li id="list1" />
       <%= label_tag(:D, "D") %>
-      <%= text_field_tag("D", "50.00", class: "input-field") %>
+      <%= text_field_tag(:D, "50.00", class: "input-field") %>
   <li id="list1" />
       <%= label_tag(:F, "F") %>
-      <%= text_field_tag("F", "0.00", class: "input-field") %>
+      <%= text_field_tag(:F, "0.00", class: "input-field") %>
   </ul>
-<!-- <%= submit_tag("changeGrades", type: "button")%> -->
-<input type="button" style="display:none">
-<!-- <button> Submit </button> -->
-<!-- to-do: add a real button, and go back to previous page -->
+    <%= submit_tag("changeGrades", type: "button")%>
+<% end %>
 <a href="javascript:history.back()">Go Back</a>
 </div>
 
